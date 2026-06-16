@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { BrowserRouter, Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -422,9 +422,10 @@ function TechStackPanel({
       <div className="tech-icon-grid">
         {items.map((item) => {
           const Icon = item.icon;
+          const brandStyle = { "--brand-color": item.brandColor } as CSSProperties;
           return (
             <article className={`tech-card tone-${item.tone}`} key={item.name}>
-              <span>
+              <span style={brandStyle}>
                 <Icon size={26} strokeWidth={2.2} />
               </span>
               <strong>{item.name}</strong>

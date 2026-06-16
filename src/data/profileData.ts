@@ -1,16 +1,13 @@
-import type { ComponentType } from "react";
+import { createElement, type ComponentType } from "react";
 import {
   Bot,
   BrainCircuit,
   Code2,
-  Cpu,
   DatabaseZap,
   Gamepad2,
   GraduationCap,
-  Layers3,
   MonitorSmartphone,
   Palette,
-  Rocket,
   Smartphone,
   Sparkles,
   Wrench,
@@ -27,18 +24,38 @@ import {
   SiGoogle,
   SiHtml5,
   SiJavascript,
+  SiLucide,
   SiNpm,
   SiReact,
   SiReactquery,
-  SiReactrouter,
+  SiReacttable,
   SiSvg,
   SiTailwindcss,
   SiTypescript,
   SiVercel,
   SiVite,
 } from "react-icons/si";
+import { siTanstack, type SimpleIcon } from "simple-icons";
 
 export type IconComponent = ComponentType<{ size?: number; className?: string; strokeWidth?: number }>;
+
+function createSimpleIcon(simpleIcon: SimpleIcon): IconComponent {
+  return ({ size = 24, className }) =>
+    createElement(
+      "svg",
+      {
+        "aria-hidden": true,
+        className,
+        height: size,
+        role: "img",
+        viewBox: "0 0 24 24",
+        width: size,
+      },
+      createElement("path", { d: simpleIcon.path, fill: "currentColor" }),
+  );
+}
+
+const SiTanstack = createSimpleIcon(siTanstack);
 
 export interface ProfileInfo {
   name: string;
@@ -66,6 +83,7 @@ export interface TechItem {
   category: "Languages" | "Frontend" | "Mobile" | "UI" | "State & Data" | "Tooling";
   icon: IconComponent;
   note: string;
+  brandColor: string;
   tone: "blue" | "cyan" | "green" | "black" | "orange" | "violet" | "rose" | "yellow";
 }
 
@@ -202,30 +220,28 @@ export const techCategories: TechItem["category"][] = [
 ];
 
 export const techStack: TechItem[] = [
-  { name: "TypeScript", category: "Languages", icon: SiTypescript, note: "Typed UI/data models", tone: "blue" },
-  { name: "JavaScript", category: "Languages", icon: SiJavascript, note: "Runtime language", tone: "yellow" },
-  { name: "HTML5", category: "Languages", icon: SiHtml5, note: "Semantic structure", tone: "orange" },
-  { name: "CSS", category: "Languages", icon: SiCss, note: "Responsive + motion", tone: "blue" },
-  { name: "React", category: "Frontend", icon: SiReact, note: "Component UI", tone: "cyan" },
-  { name: "Vite", category: "Frontend", icon: SiVite, note: "Fast web builds", tone: "violet" },
-  { name: "TanStack Router", category: "Frontend", icon: SiReactrouter, note: "Typed routes", tone: "rose" },
-  { name: "Tailwind CSS", category: "Frontend", icon: SiTailwindcss, note: "Utility styling", tone: "cyan" },
-  { name: "React Native", category: "Mobile", icon: SiReact, note: "Mobile screens", tone: "cyan" },
-  { name: "Expo", category: "Mobile", icon: SiExpo, note: "Mobile runtime", tone: "black" },
-  { name: "Android", category: "Mobile", icon: SiAndroid, note: "Native target", tone: "green" },
-  { name: "iOS", category: "Mobile", icon: SiApple, note: "Native target", tone: "black" },
-  { name: "Google Sign-In", category: "Mobile", icon: SiGoogle, note: "Auth integration", tone: "orange" },
-  { name: "Ant Design", category: "UI", icon: SiAntdesign, note: "Admin UI", tone: "blue" },
-  { name: "Lucide", category: "UI", icon: Layers3, note: "Interface icons", tone: "green" },
-  { name: "SVG", category: "UI", icon: SiSvg, note: "Vector visuals", tone: "orange" },
-  { name: "Design Tokens", category: "UI", icon: Cpu, note: "Consistent UI system", tone: "violet" },
-  { name: "TanStack Query", category: "State & Data", icon: SiReactquery, note: "Server state", tone: "rose" },
-  { name: "Zustand", category: "State & Data", icon: DatabaseZap, note: "Small client stores", tone: "black" },
-  { name: "ky / Fetch", category: "State & Data", icon: DatabaseZap, note: "API clients", tone: "green" },
-  { name: "npm", category: "Tooling", icon: SiNpm, note: "Package scripts", tone: "rose" },
-  { name: "Bun", category: "Tooling", icon: SiBun, note: "Project tooling", tone: "black" },
-  { name: "Docker", category: "Tooling", icon: SiDocker, note: "Deployment context", tone: "blue" },
-  { name: "GitHub Actions", category: "Tooling", icon: SiGithubactions, note: "CI/CD context", tone: "black" },
-  { name: "Vercel", category: "Tooling", icon: SiVercel, note: "Frontend deploy", tone: "black" },
-  { name: "Modern tooling", category: "Tooling", icon: Rocket, note: "Build/test mindset", tone: "green" },
+  { name: "TypeScript", category: "Languages", icon: SiTypescript, note: "Typed UI/data models", brandColor: "#3178C6", tone: "blue" },
+  { name: "JavaScript", category: "Languages", icon: SiJavascript, note: "Runtime language", brandColor: "#F7DF1E", tone: "yellow" },
+  { name: "HTML5", category: "Languages", icon: SiHtml5, note: "Semantic structure", brandColor: "#E34F26", tone: "orange" },
+  { name: "CSS", category: "Languages", icon: SiCss, note: "Responsive + motion", brandColor: "#663399", tone: "violet" },
+  { name: "React", category: "Frontend", icon: SiReact, note: "Component UI", brandColor: "#61DAFB", tone: "cyan" },
+  { name: "Vite", category: "Frontend", icon: SiVite, note: "Fast web builds", brandColor: "#646CFF", tone: "violet" },
+  { name: "TanStack Router", category: "Frontend", icon: SiTanstack, note: "Typed routes", brandColor: "#000000", tone: "black" },
+  { name: "Tailwind CSS", category: "Frontend", icon: SiTailwindcss, note: "Utility styling", brandColor: "#06B6D4", tone: "cyan" },
+  { name: "React Native", category: "Mobile", icon: SiReact, note: "Mobile screens", brandColor: "#61DAFB", tone: "cyan" },
+  { name: "Expo", category: "Mobile", icon: SiExpo, note: "Mobile runtime", brandColor: "#000020", tone: "black" },
+  { name: "Android", category: "Mobile", icon: SiAndroid, note: "Native target", brandColor: "#3DDC84", tone: "green" },
+  { name: "iOS", category: "Mobile", icon: SiApple, note: "Native target", brandColor: "#000000", tone: "black" },
+  { name: "Google Sign-In", category: "Mobile", icon: SiGoogle, note: "Auth integration", brandColor: "#4285F4", tone: "blue" },
+  { name: "Ant Design", category: "UI", icon: SiAntdesign, note: "Admin UI", brandColor: "#0170FE", tone: "blue" },
+  { name: "Lucide", category: "UI", icon: SiLucide, note: "Interface icons", brandColor: "#F56565", tone: "rose" },
+  { name: "SVG", category: "UI", icon: SiSvg, note: "Vector visuals", brandColor: "#FFB13B", tone: "orange" },
+  { name: "TanStack Form", category: "State & Data", icon: SiTanstack, note: "Form state", brandColor: "#000000", tone: "black" },
+  { name: "TanStack Query", category: "State & Data", icon: SiReactquery, note: "Server state", brandColor: "#FF4154", tone: "rose" },
+  { name: "TanStack Table", category: "State & Data", icon: SiReacttable, note: "Data grids", brandColor: "#FF4154", tone: "rose" },
+  { name: "npm", category: "Tooling", icon: SiNpm, note: "Package scripts", brandColor: "#CB3837", tone: "rose" },
+  { name: "Bun", category: "Tooling", icon: SiBun, note: "Project tooling", brandColor: "#000000", tone: "black" },
+  { name: "Docker", category: "Tooling", icon: SiDocker, note: "Deployment context", brandColor: "#2496ED", tone: "blue" },
+  { name: "GitHub Actions", category: "Tooling", icon: SiGithubactions, note: "CI/CD context", brandColor: "#2088FF", tone: "blue" },
+  { name: "Vercel", category: "Tooling", icon: SiVercel, note: "Frontend deploy", brandColor: "#000000", tone: "black" },
 ];

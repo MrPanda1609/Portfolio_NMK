@@ -680,6 +680,11 @@ ul {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: #f0f6ff;
+  color: var(--brand-color, var(--ink));
+}
+
+.tech-card span svg {
+  color: inherit;
 }
 
 .tech-card strong {
@@ -692,38 +697,6 @@ ul {
   color: var(--muted);
   font-size: 0.84rem;
   font-weight: 700;
-}
-
-.tone-blue svg {
-  color: var(--blue);
-}
-
-.tone-cyan svg {
-  color: var(--cyan);
-}
-
-.tone-green svg {
-  color: var(--green-dark);
-}
-
-.tone-black svg {
-  color: var(--ink);
-}
-
-.tone-orange svg {
-  color: var(--orange);
-}
-
-.tone-violet svg {
-  color: var(--violet);
-}
-
-.tone-rose svg {
-  color: var(--rose);
-}
-
-.tone-yellow svg {
-  color: #ca8a04;
 }
 
 .project-grid {
