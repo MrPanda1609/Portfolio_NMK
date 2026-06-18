@@ -517,7 +517,7 @@ function CertificatesPage() {
           ))}
         </div>
 
-        <div className="certificate-grid reveal">
+        <div className="certificate-grid">
           {visibleCertificates.map((certificate) => (
             <button
               className="certificate-card"
