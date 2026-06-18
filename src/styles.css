@@ -1107,10 +1107,18 @@ ul {
   font-weight: 700;
 }
 
-.certificate-modal__top button {
+.certificate-modal__actions {
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.certificate-modal__actions button {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   flex: 0 0 auto;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -1119,11 +1127,51 @@ ul {
   color: #f8fafc;
 }
 
-.certificate-modal__dialog > img {
-  width: 100%;
-  max-height: calc(100vh - 190px);
-  object-fit: contain;
+.certificate-modal__actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.certificate-modal__actions span {
+  display: grid;
+  min-width: 56px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.06);
+  color: #d9ff9e;
+  font-size: 0.82rem;
+  font-weight: 950;
+}
+
+.certificate-modal__viewer {
+  display: grid;
+  max-height: calc(100vh - 214px);
+  overflow: auto;
+  place-items: start center;
   background: #1b1f27;
+}
+
+.certificate-modal__viewer img {
+  display: block;
+  width: calc(var(--certificate-zoom, 1) * 100%);
+  max-width: none;
+  height: auto;
+}
+
+.certificate-modal__dialog:fullscreen,
+.certificate-modal__dialog.is-fullscreen {
+  width: 100vw;
+  max-height: none;
+  height: 100vh;
+  border: 0;
+  border-radius: 0;
+}
+
+.certificate-modal__dialog:fullscreen .certificate-modal__viewer,
+.certificate-modal__dialog.is-fullscreen .certificate-modal__viewer {
+  max-height: calc(100vh - 142px);
 }
 
 .certificate-verify {
@@ -1524,6 +1572,7 @@ ul {
   }
 
   .certificate-modal__top {
+    flex-direction: column;
     padding: 12px;
   }
 
@@ -1531,7 +1580,12 @@ ul {
     font-size: 1.1rem;
   }
 
-  .certificate-modal__dialog > img {
+  .certificate-modal__actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .certificate-modal__viewer {
     max-height: calc(100vh - 170px);
   }
 }

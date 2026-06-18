@@ -13,8 +13,11 @@ import {
   MapPin,
   Maximize2,
   MousePointerClick,
+  RotateCcw,
   Sparkles,
   X,
+  ZoomIn,
+  ZoomOut,
 } from "lucide-react";
 import {
   interests,
@@ -449,8 +452,11 @@ function TechStackPanel({
 
 function CertificatesPage() {
   const navigate = useNavigate();
+  const dialogRef = useRef<HTMLDivElement | null>(null);
   const [activeGroup, setActiveGroup] = useState("All");
   const [selectedCertificate, setSelectedCertificate] = useState<CertificateItem | null>(null);
+  const [certificateZoom, setCertificateZoom] = useState(1);
+  const [isCertificateFullscreen, setIsCertificateFullscreen] = useState(false);
 
   useRevealOnScroll();
 
@@ -461,19 +467,49 @@ function CertificatesPage() {
 
   useEffect(() => {
     if (!selectedCertificate) return;
+    setCertificateZoom(1);
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setSelectedCertificate(null);
     };
+    const onFullscreenChange = () => {
+      setIsCertificateFullscreen(document.fullscreenElement === dialogRef.current);
+    };
 
     document.body.classList.add("modal-open");
     window.addEventListener("keydown", onKeyDown);
+    document.addEventListener("fullscreenchange", onFullscreenChange);
 
     return () => {
       document.body.classList.remove("modal-open");
       window.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
     };
   }, [selectedCertificate]);
+
+  const closeCertificatePreview = () => {
+    if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
+    setIsCertificateFullscreen(false);
+    setSelectedCertificate(null);
+  };
+
+  const updateCertificateZoom = (direction: "in" | "out") => {
+    setCertificateZoom((currentZoom) => {
+      const nextZoom = direction === "in" ? currentZoom + 0.25 : currentZoom - 0.25;
+      return Math.min(3, Math.max(0.75, Number(nextZoom.toFixed(2))));
+    });
+  };
+
+  const toggleCertificateFullscreen = () => {
+    if (!isCertificateFullscreen) {
+      setIsCertificateFullscreen(true);
+      void dialogRef.current?.requestFullscreen().catch(() => undefined);
+      return;
+    }
+
+    setIsCertificateFullscreen(false);
+    if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
+  };
 
   return (
     <main className="certificate-page">
@@ -544,8 +580,12 @@ function CertificatesPage() {
       </section>
 
       {selectedCertificate ? (
-        <div className="certificate-modal" onClick={() => setSelectedCertificate(null)} role="presentation">
-          <div className="certificate-modal__dialog" onClick={(event) => event.stopPropagation()}>
+        <div className="certificate-modal" onClick={closeCertificatePreview} role="presentation">
+          <div
+            className={`certificate-modal__dialog${isCertificateFullscreen ? " is-fullscreen" : ""}`}
+            onClick={(event) => event.stopPropagation()}
+            ref={dialogRef}
+          >
             <div className="certificate-modal__top">
               <div>
                 <small>{selectedCertificate.group}</small>
@@ -555,11 +595,42 @@ function CertificatesPage() {
                   {selectedCertificate.date ? ` / ${selectedCertificate.date}` : ""}
                 </p>
               </div>
-              <button aria-label="Close certificate preview" onClick={() => setSelectedCertificate(null)} type="button">
-                <X size={22} />
-              </button>
+              <div className="certificate-modal__actions" aria-label="Certificate preview controls">
+                <button
+                  aria-label="Zoom out"
+                  disabled={certificateZoom <= 0.75}
+                  onClick={() => updateCertificateZoom("out")}
+                  type="button"
+                >
+                  <ZoomOut size={20} />
+                </button>
+                <span>{Math.round(certificateZoom * 100)}%</span>
+                <button
+                  aria-label="Zoom in"
+                  disabled={certificateZoom >= 3}
+                  onClick={() => updateCertificateZoom("in")}
+                  type="button"
+                >
+                  <ZoomIn size={20} />
+                </button>
+                <button aria-label="Reset zoom" onClick={() => setCertificateZoom(1)} type="button">
+                  <RotateCcw size={19} />
+                </button>
+                <button
+                  aria-label={isCertificateFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                  onClick={toggleCertificateFullscreen}
+                  type="button"
+                >
+                  <Maximize2 size={20} />
+                </button>
+                <button aria-label="Close certificate preview" onClick={closeCertificatePreview} type="button">
+                  <X size={22} />
+                </button>
+              </div>
             </div>
-            <img src={selectedCertificate.image} alt={selectedCertificate.title} />
+            <div className="certificate-modal__viewer" style={{ "--certificate-zoom": certificateZoom } as CSSProperties}>
+              <img src={selectedCertificate.image} alt={selectedCertificate.title} />
+            </div>
             {selectedCertificate.verifyUrl ? (
               <a className="certificate-verify" href={selectedCertificate.verifyUrl} rel="noreferrer" target="_blank">
                 Verify certificate
