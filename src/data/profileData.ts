@@ -1,4 +1,4 @@
-import { createElement, type ComponentType } from "react";
+import type { ComponentType } from "react";
 import {
   Bot,
   BrainCircuit,
@@ -12,50 +12,26 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
-import {
-  SiAndroid,
-  SiAntdesign,
-  SiApple,
-  SiBun,
-  SiCss,
-  SiDocker,
-  SiExpo,
-  SiGithubactions,
-  SiGoogle,
-  SiHtml5,
-  SiJavascript,
-  SiLucide,
-  SiNpm,
-  SiReact,
-  SiReactquery,
-  SiReacttable,
-  SiSvg,
-  SiTailwindcss,
-  SiTypescript,
-  SiVercel,
-  SiVite,
-} from "react-icons/si";
-import { siTanstack, type SimpleIcon } from "simple-icons";
+import androidIcon from "devicon/icons/android/android-original.svg";
+import antDesignIcon from "devicon/icons/antdesign/antdesign-original.svg";
+import appleIcon from "devicon/icons/apple/apple-original.svg";
+import bunIcon from "devicon/icons/bun/bun-original.svg";
+import cssIcon from "devicon/icons/css3/css3-original.svg";
+import dockerIcon from "devicon/icons/docker/docker-original.svg";
+import expoIcon from "devicon/icons/expo/expo-original.svg";
+import githubActionsIcon from "devicon/icons/githubactions/githubactions-original.svg";
+import googleIcon from "devicon/icons/google/google-original.svg";
+import htmlIcon from "devicon/icons/html5/html5-original.svg";
+import javascriptIcon from "devicon/icons/javascript/javascript-original.svg";
+import npmIcon from "devicon/icons/npm/npm-original-wordmark.svg";
+import reactIcon from "devicon/icons/react/react-original.svg";
+import reactNativeIcon from "devicon/icons/reactnative/reactnative-original.svg";
+import tailwindIcon from "devicon/icons/tailwindcss/tailwindcss-original.svg";
+import typescriptIcon from "devicon/icons/typescript/typescript-original.svg";
+import vercelIcon from "devicon/icons/vercel/vercel-original.svg";
+import viteIcon from "devicon/icons/vitejs/vitejs-original.svg";
 
 export type IconComponent = ComponentType<{ size?: number; className?: string; strokeWidth?: number }>;
-
-function createSimpleIcon(simpleIcon: SimpleIcon): IconComponent {
-  return ({ size = 24, className }) =>
-    createElement(
-      "svg",
-      {
-        "aria-hidden": true,
-        className,
-        height: size,
-        role: "img",
-        viewBox: "0 0 24 24",
-        width: size,
-      },
-      createElement("path", { d: simpleIcon.path, fill: "currentColor" }),
-  );
-}
-
-const SiTanstack = createSimpleIcon(siTanstack);
 
 export interface ProfileInfo {
   name: string;
@@ -81,7 +57,8 @@ export interface SkillArea {
 export interface TechItem {
   name: string;
   category: "Languages" | "Frontend" | "Mobile" | "UI" | "State & Data" | "Tooling";
-  icon: IconComponent;
+  iconSrc?: string;
+  mark?: string;
   note: string;
   brandColor: string;
   tone: "blue" | "cyan" | "green" | "black" | "orange" | "violet" | "rose" | "yellow";
@@ -220,28 +197,28 @@ export const techCategories: TechItem["category"][] = [
 ];
 
 export const techStack: TechItem[] = [
-  { name: "TypeScript", category: "Languages", icon: SiTypescript, note: "Typed UI/data models", brandColor: "#3178C6", tone: "blue" },
-  { name: "JavaScript", category: "Languages", icon: SiJavascript, note: "Runtime language", brandColor: "#F7DF1E", tone: "yellow" },
-  { name: "HTML5", category: "Languages", icon: SiHtml5, note: "Semantic structure", brandColor: "#E34F26", tone: "orange" },
-  { name: "CSS", category: "Languages", icon: SiCss, note: "Responsive + motion", brandColor: "#663399", tone: "violet" },
-  { name: "React", category: "Frontend", icon: SiReact, note: "Component UI", brandColor: "#61DAFB", tone: "cyan" },
-  { name: "Vite", category: "Frontend", icon: SiVite, note: "Fast web builds", brandColor: "#646CFF", tone: "violet" },
-  { name: "TanStack Router", category: "Frontend", icon: SiTanstack, note: "Typed routes", brandColor: "#000000", tone: "black" },
-  { name: "Tailwind CSS", category: "Frontend", icon: SiTailwindcss, note: "Utility styling", brandColor: "#06B6D4", tone: "cyan" },
-  { name: "React Native", category: "Mobile", icon: SiReact, note: "Mobile screens", brandColor: "#61DAFB", tone: "cyan" },
-  { name: "Expo", category: "Mobile", icon: SiExpo, note: "Mobile runtime", brandColor: "#000020", tone: "black" },
-  { name: "Android", category: "Mobile", icon: SiAndroid, note: "Native target", brandColor: "#3DDC84", tone: "green" },
-  { name: "iOS", category: "Mobile", icon: SiApple, note: "Native target", brandColor: "#000000", tone: "black" },
-  { name: "Google Sign-In", category: "Mobile", icon: SiGoogle, note: "Auth integration", brandColor: "#4285F4", tone: "blue" },
-  { name: "Ant Design", category: "UI", icon: SiAntdesign, note: "Admin UI", brandColor: "#0170FE", tone: "blue" },
-  { name: "Lucide", category: "UI", icon: SiLucide, note: "Interface icons", brandColor: "#F56565", tone: "rose" },
-  { name: "SVG", category: "UI", icon: SiSvg, note: "Vector visuals", brandColor: "#FFB13B", tone: "orange" },
-  { name: "TanStack Form", category: "State & Data", icon: SiTanstack, note: "Form state", brandColor: "#000000", tone: "black" },
-  { name: "TanStack Query", category: "State & Data", icon: SiReactquery, note: "Server state", brandColor: "#FF4154", tone: "rose" },
-  { name: "TanStack Table", category: "State & Data", icon: SiReacttable, note: "Data grids", brandColor: "#FF4154", tone: "rose" },
-  { name: "npm", category: "Tooling", icon: SiNpm, note: "Package scripts", brandColor: "#CB3837", tone: "rose" },
-  { name: "Bun", category: "Tooling", icon: SiBun, note: "Project tooling", brandColor: "#000000", tone: "black" },
-  { name: "Docker", category: "Tooling", icon: SiDocker, note: "Deployment context", brandColor: "#2496ED", tone: "blue" },
-  { name: "GitHub Actions", category: "Tooling", icon: SiGithubactions, note: "CI/CD context", brandColor: "#2088FF", tone: "blue" },
-  { name: "Vercel", category: "Tooling", icon: SiVercel, note: "Frontend deploy", brandColor: "#000000", tone: "black" },
+  { name: "TypeScript", category: "Languages", iconSrc: typescriptIcon, note: "Typed UI/data models", brandColor: "#3178C6", tone: "blue" },
+  { name: "JavaScript", category: "Languages", iconSrc: javascriptIcon, note: "Runtime language", brandColor: "#F7DF1E", tone: "yellow" },
+  { name: "HTML5", category: "Languages", iconSrc: htmlIcon, note: "Semantic structure", brandColor: "#E34F26", tone: "orange" },
+  { name: "CSS", category: "Languages", iconSrc: cssIcon, note: "Responsive + motion", brandColor: "#663399", tone: "violet" },
+  { name: "React", category: "Frontend", iconSrc: reactIcon, note: "Component UI", brandColor: "#61DAFB", tone: "cyan" },
+  { name: "Vite", category: "Frontend", iconSrc: viteIcon, note: "Fast web builds", brandColor: "#646CFF", tone: "violet" },
+  { name: "TanStack Router", category: "Frontend", mark: "TSR", note: "Typed routes", brandColor: "#111827", tone: "black" },
+  { name: "Tailwind CSS", category: "Frontend", iconSrc: tailwindIcon, note: "Utility styling", brandColor: "#06B6D4", tone: "cyan" },
+  { name: "React Native", category: "Mobile", iconSrc: reactNativeIcon, note: "Mobile screens", brandColor: "#61DAFB", tone: "cyan" },
+  { name: "Expo", category: "Mobile", iconSrc: expoIcon, note: "Mobile runtime", brandColor: "#000020", tone: "black" },
+  { name: "Android", category: "Mobile", iconSrc: androidIcon, note: "Native target", brandColor: "#3DDC84", tone: "green" },
+  { name: "iOS", category: "Mobile", iconSrc: appleIcon, note: "Native target", brandColor: "#000000", tone: "black" },
+  { name: "Google Sign-In", category: "Mobile", iconSrc: googleIcon, note: "Auth integration", brandColor: "#4285F4", tone: "blue" },
+  { name: "Ant Design", category: "UI", iconSrc: antDesignIcon, note: "Admin UI", brandColor: "#0170FE", tone: "blue" },
+  { name: "Lucide", category: "UI", mark: "Lu", note: "Interface icons", brandColor: "#F56565", tone: "rose" },
+  { name: "SVG", category: "UI", mark: "SVG", note: "Vector visuals", brandColor: "#FFB13B", tone: "orange" },
+  { name: "TanStack Form", category: "State & Data", mark: "TSF", note: "Form state", brandColor: "#111827", tone: "black" },
+  { name: "TanStack Query", category: "State & Data", mark: "TSQ", note: "Server state", brandColor: "#FF4154", tone: "rose" },
+  { name: "TanStack Table", category: "State & Data", mark: "TST", note: "Data grids", brandColor: "#FF4154", tone: "rose" },
+  { name: "npm", category: "Tooling", iconSrc: npmIcon, note: "Package scripts", brandColor: "#CB3837", tone: "rose" },
+  { name: "Bun", category: "Tooling", iconSrc: bunIcon, note: "Project tooling", brandColor: "#000000", tone: "black" },
+  { name: "Docker", category: "Tooling", iconSrc: dockerIcon, note: "Deployment context", brandColor: "#2496ED", tone: "blue" },
+  { name: "GitHub Actions", category: "Tooling", iconSrc: githubActionsIcon, note: "CI/CD context", brandColor: "#2088FF", tone: "blue" },
+  { name: "Vercel", category: "Tooling", iconSrc: vercelIcon, note: "Frontend deploy", brandColor: "#000000", tone: "black" },
 ];

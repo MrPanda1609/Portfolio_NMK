@@ -75,7 +75,7 @@ function AppRoutes() {
 function HomePage() {
   const [activeSection, setActiveSection] = useState(homeSections[0].id);
   const [activeSkillId, setActiveSkillId] = useState(skillAreas[0].id);
-  const [activeTechCategory, setActiveTechCategory] = useState<TechItem["category"]>("Frontend");
+  const [activeTechCategory, setActiveTechCategory] = useState<TechItem["category"]>("Languages");
   const [expandedProject, setExpandedProject] = useState(projects[0].slug);
   const [pendingSection, setPendingSection] = useState<string | null>(null);
   const pendingSectionTimer = useRef<number | null>(null);
@@ -421,12 +421,10 @@ function TechStackPanel({
       </div>
       <div className="tech-icon-grid">
         {items.map((item) => {
-          const Icon = item.icon;
-          const brandStyle = { "--brand-color": item.brandColor } as CSSProperties;
           return (
             <article className={`tech-card tone-${item.tone}`} key={item.name}>
-              <span style={brandStyle}>
-                <Icon size={26} strokeWidth={2.2} />
+              <span className="tech-card__icon" style={{ "--brand-color": item.brandColor } as CSSProperties}>
+                {item.iconSrc ? <img src={item.iconSrc} alt="" aria-hidden="true" /> : <b>{item.mark}</b>}
               </span>
               <strong>{item.name}</strong>
               <small>{item.note}</small>

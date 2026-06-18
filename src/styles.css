@@ -672,19 +672,28 @@ ul {
     box-shadow 180ms ease;
 }
 
-.tech-card span {
+.tech-card__icon {
   display: grid;
-  width: 46px;
-  height: 46px;
+  width: 54px;
+  height: 54px;
   place-items: center;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #f0f6ff;
+  background: #f6f9ff;
   color: var(--brand-color, var(--ink));
 }
 
-.tech-card span svg {
-  color: inherit;
+.tech-card__icon img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.tech-card__icon b {
+  color: var(--brand-color, var(--ink));
+  font-size: 0.9rem;
+  font-weight: 950;
+  letter-spacing: 0;
 }
 
 .tech-card strong {
