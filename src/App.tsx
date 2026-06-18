@@ -9,6 +9,8 @@ import {
   ExternalLink,
   Gamepad2,
   GraduationCap,
+  Github,
+  Linkedin,
   Mail,
   MapPin,
   Maximize2,
@@ -132,7 +134,7 @@ function HomePage() {
                 </ScrollButton>
                 <Link className="btn btn-secondary" to="/certificates">
                   <Award size={18} />
-                  Certificates
+                  Chứng chỉ
                 </Link>
               </div>
             </div>
@@ -301,7 +303,20 @@ function HomePage() {
             <div className="contact-card reveal">
               <Mail size={26} />
               <h3>Profile channels</h3>
-              <p>GitHub / LinkedIn / CV / Email</p>
+              <div className="contact-links">
+                <a href="https://github.com/MrPanda1609" rel="noreferrer" target="_blank">
+                  <Github size={18} />
+                  github.com/MrPanda1609
+                </a>
+                <a href="https://linkedin.com/in/khoinm-fe" rel="noreferrer" target="_blank">
+                  <Linkedin size={18} />
+                  linkedin.com/in/khoinm-fe
+                </a>
+                <a href="mailto:khoinmdevfe@gmail.com">
+                  <Mail size={18} />
+                  khoinmdevfe@gmail.com
+                </a>
+              </div>
               <ScrollButton targetId="home" variant="secondary">
                 <ArrowLeft size={18} />
                 Back to top
@@ -670,6 +685,12 @@ function ProjectCasePage({ project }: { project: ProjectDetail }) {
             <span>{project.role}</span>
           </div>
           <TagRow items={project.stack} />
+          {project.liveUrl ? (
+            <a className="btn btn-secondary project-live-link" href={project.liveUrl} rel="noreferrer" target="_blank">
+              <ExternalLink size={18} />
+              animefetish.id.vn
+            </a>
+          ) : null}
         </div>
         <ProjectMockup screenshot={activeShot} />
       </section>
@@ -739,7 +760,7 @@ function ProjectCasePage({ project }: { project: ProjectDetail }) {
 
 function ProjectMockup({ screenshot }: { screenshot: ProjectScreenshot }) {
   return (
-    <figure className={`project-mockup mockup-${screenshot.kind} reveal`}>
+    <figure className={`project-mockup mockup-${screenshot.kind}`}>
       <div className="mockup-bar">
         <span />
         <span />

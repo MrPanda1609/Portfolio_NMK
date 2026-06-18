@@ -827,6 +827,10 @@ ul {
   margin-top: 18px;
 }
 
+.project-live-link {
+  margin-top: 16px;
+}
+
 .contact-section {
   min-height: 72vh;
   background: #151515;
@@ -869,6 +873,36 @@ ul {
 .contact-card h3 {
   margin-top: 16px;
   color: #f8fafc;
+}
+
+.contact-links {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid #3a3a3a;
+  border-radius: 999px;
+  background: #1b1b1b;
+  padding: 11px 13px;
+  color: #f8fafc;
+  font-size: 0.92rem;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.contact-links svg {
+  flex: 0 0 auto;
+}
+
+.contact-links a:hover {
+  border-color: rgba(184, 239, 114, 0.6);
+  color: #d9ff9e;
 }
 
 .project-page {
@@ -1213,6 +1247,17 @@ ul {
   text-transform: uppercase;
 }
 
+.project-topbar .btn {
+  min-height: 48px;
+  border-radius: 999px;
+  box-shadow: none;
+  padding: 0 20px;
+}
+
+.project-topbar .btn-secondary {
+  background: rgba(255, 255, 255, 0.92);
+}
+
 .project-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.78fr) minmax(420px, 1fr);
@@ -1337,7 +1382,7 @@ ul {
   gap: 10px;
   align-items: center;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: 14px;
   background: var(--surface);
   padding: 8px;
   color: var(--ink);
@@ -1359,7 +1404,7 @@ ul {
 .shot-list img {
   width: 86px;
   height: 54px;
-  border-radius: 6px;
+  border-radius: 10px;
   object-fit: cover;
 }
 

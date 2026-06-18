@@ -35,6 +35,7 @@ export interface ProjectDetail {
   title: string;
   type: string;
   period: string;
+  liveUrl?: string;
   summary: string;
   role: string;
   stack: string[];
@@ -155,6 +156,7 @@ export const animeStreamingProject: ProjectDetail = {
   title: "Anime Streaming Web",
   type: "Frontend Project",
   period: "Personal learning project",
+  liveUrl: "https://animefetish.id.vn/",
   summary:
     "Frontend-only anime streaming website sử dụng public APIs, tập trung vào UI phim, tìm kiếm, trang chi tiết và trải nghiệm xem video.",
   role:
@@ -174,6 +176,7 @@ export const animeStreamingProject: ProjectDetail = {
     "API layer có cache, fallback source, lọc anime Nhật Bản, chuẩn hóa dữ liệu và xử lý ảnh WebP.",
     "Watch page dùng HLS.js, lưu tiến trình xem, điều khiển player, gesture mobile và skip intro/ad segment.",
     "Auth/comment flow dùng Firebase cho đăng nhập, bình luận và trải nghiệm cá nhân hóa.",
+    "Live domain: https://animefetish.id.vn/",
   ],
   features: [
     {
@@ -212,6 +215,24 @@ export const animeStreamingProject: ProjectDetail = {
       src: "/assets/evidence/anime-streaming-home.png",
       alt: "Anime streaming website homepage",
       label: "Homepage",
+      kind: "wide",
+    },
+    {
+      src: "/assets/evidence/anime-streaming-detail.png",
+      alt: "Anime streaming detail page",
+      label: "Anime detail",
+      kind: "wide",
+    },
+    {
+      src: "/assets/evidence/anime-streaming-watch.png",
+      alt: "Anime streaming watch page",
+      label: "Watch player",
+      kind: "wide",
+    },
+    {
+      src: "/assets/evidence/anime-streaming-search.png",
+      alt: "Anime streaming search page",
+      label: "Search",
       kind: "wide",
     },
     {
