@@ -3,14 +3,18 @@ import { BrowserRouter, Link, Route, Routes, useLocation, useNavigate } from "re
 import {
   ArrowLeft,
   ArrowRight,
+  Award,
+  BadgeCheck,
   ChevronDown,
   ExternalLink,
   Gamepad2,
   GraduationCap,
   Mail,
   MapPin,
+  Maximize2,
   MousePointerClick,
   Sparkles,
+  X,
 } from "lucide-react";
 import {
   interests,
@@ -23,7 +27,8 @@ import {
   type SkillArea,
   type TechItem,
 } from "./data/profileData";
-import { projects, vstepgoProject, type ProjectScreenshot } from "./data/projectsData";
+import { certificateGroups, certificates, type CertificateItem } from "./data/certificatesData";
+import { animeStreamingProject, projects, vstepgoProject, type ProjectDetail, type ProjectScreenshot } from "./data/projectsData";
 
 const homeSections = [
   { id: "home", label: "Home" },
@@ -65,7 +70,9 @@ function AppRoutes() {
     <div className="app-shell">
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/projects/vstepgo" element={<VstepgoPage />} />
+        <Route path="/certificates" element={<CertificatesPage />} />
+        <Route path="/projects/vstepgo" element={<ProjectCasePage project={vstepgoProject} />} />
+        <Route path="/projects/anime-streaming" element={<ProjectCasePage project={animeStreamingProject} />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </div>
@@ -120,6 +127,10 @@ function HomePage() {
                   <ExternalLink size={18} />
                   Dự án
                 </ScrollButton>
+                <Link className="btn btn-secondary" to="/certificates">
+                  <Award size={18} />
+                  Certificates
+                </Link>
               </div>
             </div>
 
@@ -255,16 +266,16 @@ function HomePage() {
                           <div className="project-proof-row">
                             <span>
                               <ProofIcon size={16} />
-                              Case study evidence
+                              {project.proofLabel}
                             </span>
                             <span>
                               <MediaIcon size={16} />
-                              Mobile + Web + Admin
+                              {project.mediaLabel}
                             </span>
                           </div>
                           <TagRow items={project.tags} />
                           <Link className="btn btn-primary" to={`/projects/${project.slug}`}>
-                            Xem case study
+                            {project.ctaLabel}
                             <ArrowRight size={18} />
                           </Link>
                         </div>
@@ -436,9 +447,135 @@ function TechStackPanel({
   );
 }
 
-function VstepgoPage() {
+function CertificatesPage() {
   const navigate = useNavigate();
-  const [activeShot, setActiveShot] = useState<ProjectScreenshot>(vstepgoProject.screenshots[0]);
+  const [activeGroup, setActiveGroup] = useState("All");
+  const [selectedCertificate, setSelectedCertificate] = useState<CertificateItem | null>(null);
+
+  useRevealOnScroll();
+
+  const visibleCertificates = useMemo(() => {
+    if (activeGroup === "All") return certificates;
+    return certificates.filter((certificate) => certificate.group === activeGroup);
+  }, [activeGroup]);
+
+  useEffect(() => {
+    if (!selectedCertificate) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedCertificate(null);
+    };
+
+    document.body.classList.add("modal-open");
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.classList.remove("modal-open");
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [selectedCertificate]);
+
+  return (
+    <main className="certificate-page">
+      <header className="project-topbar">
+        <button className="btn btn-secondary" onClick={() => navigate("/")} type="button">
+          <ArrowLeft size={18} />
+          Home
+        </button>
+        <span>Certificates</span>
+      </header>
+
+      <section className="certificate-hero page-container">
+        <div className="reveal">
+          <span className="section-kicker">Certificates</span>
+          <h1>Certificates.</h1>
+          <p>
+            Tổng hợp chứng chỉ đã hoàn thành, được chia theo nguồn và nhóm học tập. Chọn từng chứng chỉ để xem ảnh lớn rõ nét.
+          </p>
+        </div>
+        <div className="certificate-summary reveal">
+          <BadgeCheck size={28} />
+          <strong>{certificates.length}</strong>
+          <span>Total certificates</span>
+        </div>
+      </section>
+
+      <section className="certificate-section page-container">
+        <div className="certificate-filter reveal" role="tablist" aria-label="Certificate groups">
+          {["All", ...certificateGroups].map((group) => (
+            <button
+              aria-selected={activeGroup === group}
+              className={activeGroup === group ? "is-active" : ""}
+              key={group}
+              onClick={() => setActiveGroup(group)}
+              role="tab"
+              type="button"
+            >
+              {group}
+              <span>{group === "All" ? certificates.length : certificates.filter((item) => item.group === group).length}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="certificate-grid reveal">
+          {visibleCertificates.map((certificate) => (
+            <button
+              className="certificate-card"
+              key={certificate.slug}
+              onClick={() => setSelectedCertificate(certificate)}
+              type="button"
+            >
+              <span className="certificate-card__image">
+                <img src={certificate.image} alt={certificate.title} loading="lazy" />
+                <span>
+                  <Maximize2 size={16} />
+                  View
+                </span>
+              </span>
+              <span className="certificate-card__body">
+                <small>{certificate.group}</small>
+                <strong>{certificate.title}</strong>
+                <em>{certificate.issuer}</em>
+                {certificate.date ? <span>{certificate.date}</span> : null}
+              </span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {selectedCertificate ? (
+        <div className="certificate-modal" onClick={() => setSelectedCertificate(null)} role="presentation">
+          <div className="certificate-modal__dialog" onClick={(event) => event.stopPropagation()}>
+            <div className="certificate-modal__top">
+              <div>
+                <small>{selectedCertificate.group}</small>
+                <h2>{selectedCertificate.title}</h2>
+                <p>
+                  {selectedCertificate.issuer}
+                  {selectedCertificate.date ? ` / ${selectedCertificate.date}` : ""}
+                </p>
+              </div>
+              <button aria-label="Close certificate preview" onClick={() => setSelectedCertificate(null)} type="button">
+                <X size={22} />
+              </button>
+            </div>
+            <img src={selectedCertificate.image} alt={selectedCertificate.title} />
+            {selectedCertificate.verifyUrl ? (
+              <a className="certificate-verify" href={selectedCertificate.verifyUrl} rel="noreferrer" target="_blank">
+                Verify certificate
+                <ExternalLink size={16} />
+              </a>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+    </main>
+  );
+}
+
+function ProjectCasePage({ project }: { project: ProjectDetail }) {
+  const navigate = useNavigate();
+  const [activeShot, setActiveShot] = useState<ProjectScreenshot>(project.screenshots[0]);
 
   useRevealOnScroll();
 
@@ -449,19 +586,19 @@ function VstepgoPage() {
           <ArrowLeft size={18} />
           Home
         </button>
-        <span>{vstepgoProject.type}</span>
+        <span>{project.type}</span>
       </header>
 
       <section className="project-hero page-container">
         <div className="reveal">
-          <span className="section-kicker">{vstepgoProject.period}</span>
-          <h1>{vstepgoProject.title}</h1>
-          <p>{vstepgoProject.summary}</p>
+          <span className="section-kicker">{project.period}</span>
+          <h1>{project.title}</h1>
+          <p>{project.summary}</p>
           <div className="project-role-card">
             <GraduationCap size={22} />
-            <span>{vstepgoProject.role}</span>
+            <span>{project.role}</span>
           </div>
-          <TagRow items={vstepgoProject.stack} />
+          <TagRow items={project.stack} />
         </div>
         <ProjectMockup screenshot={activeShot} />
       </section>
@@ -470,10 +607,10 @@ function VstepgoPage() {
         <SectionIntro
           kicker="Major flows"
           title="Product flows."
-          text="Các luồng chính của VSTEPGO thể hiện phạm vi triển khai mobile app, learner experience, admin UI và media workflow."
+          text={`Các luồng chính của ${project.title} thể hiện phạm vi triển khai UI, API state và trải nghiệm sản phẩm.`}
         />
         <div className="feature-grid reveal">
-          {vstepgoProject.features.map((feature) => {
+          {project.features.map((feature) => {
             const Icon = feature.icon;
             return (
               <article className="feature-card" key={feature.title}>
@@ -490,12 +627,12 @@ function VstepgoPage() {
         <SectionIntro
           kicker="Screenshots"
           title="Screenshots."
-          text="Gallery giao diện thể hiện các màn learner, exam, feedback, booking và admin dashboard."
+          text="Gallery giao diện thể hiện các màn hình và bằng chứng giao diện chính của dự án."
         />
         <div className="screenshot-layout reveal">
           <ProjectMockup screenshot={activeShot} />
           <div className="shot-list">
-            {vstepgoProject.screenshots.map((shot) => (
+            {project.screenshots.map((shot) => (
               <button
                 className={activeShot.src === shot.src ? "is-active" : ""}
                 key={shot.src}
@@ -514,10 +651,10 @@ function VstepgoPage() {
         <SectionIntro
           kicker="Honest boundaries"
           title="Scope."
-          text="VSTEPGO được trình bày đúng phạm vi đồ án tốt nghiệp, tập trung vào năng lực triển khai frontend/mobile và product UI."
+          text={`${project.title} được trình bày đúng phạm vi thực tế, tập trung vào năng lực triển khai frontend và product UI.`}
         />
         <div className="boundary-list reveal">
-          {vstepgoProject.boundaries.map((boundary) => (
+          {project.boundaries.map((boundary) => (
             <article key={boundary}>
               <Sparkles size={18} />
               <p>{boundary}</p>

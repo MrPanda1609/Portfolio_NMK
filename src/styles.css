@@ -47,6 +47,10 @@ body {
     72px 72px;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 button,
 input,
 textarea,
@@ -872,6 +876,270 @@ ul {
   padding: 24px 0 80px;
 }
 
+.certificate-page {
+  min-height: 100vh;
+  padding: 24px 0 88px;
+}
+
+.certificate-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.32fr);
+  gap: 24px;
+  align-items: end;
+  padding-top: 96px;
+}
+
+.certificate-hero h1 {
+  margin-top: 12px;
+  font-size: 5.2rem;
+  line-height: 0.95;
+}
+
+.certificate-hero p {
+  max-width: 760px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 1.08rem;
+  font-weight: 650;
+  line-height: 1.7;
+}
+
+.certificate-summary {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.82);
+  padding: 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.certificate-summary svg {
+  color: var(--green-dark);
+}
+
+.certificate-summary strong {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.certificate-summary span {
+  color: var(--muted);
+  font-weight: 850;
+}
+
+.certificate-section {
+  padding-top: 42px;
+}
+
+.certificate-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.certificate-filter button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #f5f9ff;
+  padding: 0 14px;
+  color: var(--muted);
+  font-weight: 950;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.certificate-filter button span {
+  display: grid;
+  min-width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(89, 99, 114, 0.1);
+  font-size: 0.76rem;
+}
+
+.certificate-filter button:hover,
+.certificate-filter button.is-active {
+  background: var(--green);
+  color: #112900;
+  transform: translateY(-2px);
+}
+
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.certificate-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.88);
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.certificate-card:hover {
+  border-color: #b8e6a0;
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+}
+
+.certificate-card__image {
+  position: relative;
+  display: block;
+  aspect-ratio: 1.42 / 1;
+  background: #eef3f8;
+}
+
+.certificate-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.certificate-card__image > span {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  background: rgba(21, 21, 21, 0.72);
+  padding: 7px 10px;
+  color: #f8fafc;
+  font-size: 0.78rem;
+  font-weight: 950;
+  backdrop-filter: blur(10px);
+}
+
+.certificate-card__body {
+  display: grid;
+  gap: 7px;
+  padding: 16px;
+}
+
+.certificate-card__body small {
+  color: var(--green-dark);
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.certificate-card__body strong {
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.certificate-card__body em,
+.certificate-card__body span {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.certificate-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  background: rgba(10, 14, 20, 0.82);
+  padding: 24px;
+  backdrop-filter: blur(14px);
+}
+
+.certificate-modal__dialog {
+  display: grid;
+  max-height: calc(100vh - 48px);
+  width: min(1180px, 100%);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+  background: #101318;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+}
+
+.certificate-modal__top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 16px 18px;
+  color: #f8fafc;
+}
+
+.certificate-modal__top small {
+  color: #b8ef72;
+  font-size: 0.74rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.certificate-modal__top h2 {
+  margin-top: 4px;
+  font-size: 1.45rem;
+  line-height: 1.25;
+}
+
+.certificate-modal__top p {
+  margin-top: 6px;
+  color: #cbd5e1;
+  font-weight: 700;
+}
+
+.certificate-modal__top button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+}
+
+.certificate-modal__dialog > img {
+  width: 100%;
+  max-height: calc(100vh - 190px);
+  object-fit: contain;
+  background: #1b1f27;
+}
+
+.certificate-verify {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 8px;
+  margin: 14px 18px 18px;
+  border: 1px solid rgba(184, 239, 114, 0.42);
+  border-radius: var(--radius);
+  background: rgba(184, 239, 114, 0.1);
+  padding: 10px 12px;
+  color: #d9ff9e;
+  font-weight: 950;
+}
+
 .project-topbar {
   position: sticky;
   top: 16px;
@@ -1118,6 +1386,7 @@ ul {
 
   .hero-grid,
   .project-hero,
+  .certificate-hero,
   .contact-grid,
   .screenshot-layout {
     grid-template-columns: 1fr;
@@ -1125,6 +1394,7 @@ ul {
 
   .about-panels,
   .tech-icon-grid,
+  .certificate-grid,
   .feature-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1188,6 +1458,10 @@ ul {
     font-size: 2.45rem;
   }
 
+  .certificate-hero h1 {
+    font-size: 3.25rem;
+  }
+
   .contact-grid h2 {
     font-size: 2.6rem;
   }
@@ -1202,6 +1476,7 @@ ul {
   .skill-explorer,
   .detail-columns,
   .tech-icon-grid,
+  .certificate-grid,
   .feature-grid {
     grid-template-columns: 1fr;
   }
@@ -1239,6 +1514,26 @@ ul {
   .contact-section {
     min-height: auto;
   }
+
+  .certificate-modal {
+    padding: 12px;
+  }
+
+  .certificate-modal__dialog {
+    max-height: calc(100vh - 24px);
+  }
+
+  .certificate-modal__top {
+    padding: 12px;
+  }
+
+  .certificate-modal__top h2 {
+    font-size: 1.1rem;
+  }
+
+  .certificate-modal__dialog > img {
+    max-height: calc(100vh - 170px);
+  }
 }
 
 @media (max-width: 460px) {
@@ -1259,6 +1554,7 @@ ul {
   }
 
   .section-intro h2,
+  .certificate-hero h1,
   .contact-grid h2 {
     font-size: 2.15rem;
   }
