@@ -114,11 +114,11 @@ function HomePage() {
               <div className="hero-actions">
                 <ScrollButton targetId="skills" variant="primary">
                   <MousePointerClick size={18} />
-                  Core strengths
+                  Năng lực chính
                 </ScrollButton>
                 <ScrollButton targetId="projects" variant="secondary">
                   <ExternalLink size={18} />
-                  Projects
+                  Dự án
                 </ScrollButton>
               </div>
             </div>
@@ -126,7 +126,7 @@ function HomePage() {
             <div className="hero-card reveal">
               <div className="portrait-wrap">
                 <img src={profileInfo.avatar} alt="Nguyễn Minh Khôi" />
-                <span>Fresher</span>
+                <span>Frontend</span>
               </div>
               <div className="hero-card__body">
                 <h2>{profileInfo.name}</h2>
@@ -138,7 +138,7 @@ function HomePage() {
                   </span>
                   <span>
                     <Gamepad2 size={14} />
-                    AI, công nghệ mới, gaming
+                    AI tools, mobile UX, gaming systems
                   </span>
                 </div>
               </div>
@@ -159,7 +159,7 @@ function HomePage() {
           <div className="page-container split-section">
             <SectionIntro
               kicker="Profile"
-              title="Frontend Developer định hướng sản phẩm."
+              title="Profile."
               text="Fresher ngành Công nghệ thông tin tại Đại học FPT HCM, tập trung vào React, TypeScript, UI engineering và trải nghiệm mobile."
             />
             <div className="about-panels reveal">
@@ -196,8 +196,8 @@ function HomePage() {
           <div className="page-container">
             <SectionIntro
               kicker="Core strengths"
-              title="Năng lực cốt lõi."
-              text="Kỹ năng được tổ chức theo các nhóm triển khai sản phẩm: web frontend, mobile UI, UI/UX, state management và tooling."
+              title="Năng lực chính."
+              text="Các nhóm năng lực phục vụ phát triển sản phẩm số: web frontend, mobile UI, UI/UX, state management và tooling."
             />
             <SkillExplorer activeSkill={activeSkill} activeSkillId={activeSkillId} onChange={setActiveSkillId} />
           </div>
@@ -207,8 +207,8 @@ function HomePage() {
           <div className="page-container">
             <SectionIntro
               kicker="Tech stack"
-              title="Công nghệ sử dụng."
-              text="Hệ sinh thái công cụ phục vụ phát triển giao diện, quản lý dữ liệu, xây dựng ứng dụng mobile và triển khai sản phẩm."
+              title="Tech stack."
+              text="Công cụ đang sử dụng cho phát triển giao diện, quản lý dữ liệu phía client, mobile app và quy trình build/deploy."
             />
             <TechStackPanel
               activeCategory={activeTechCategory}
@@ -223,7 +223,7 @@ function HomePage() {
             <SectionIntro
               kicker="Projects"
               title="Dự án tiêu biểu."
-              text="VSTEPGO là capstone project thể hiện năng lực triển khai mobile app, web frontend, admin dashboard và các luồng sản phẩm phức tạp."
+              text="VSTEPGO được giữ như case study chính, dùng để chứng minh năng lực frontend/mobile qua giao diện, luồng dữ liệu và trải nghiệm sản phẩm."
             />
             <div className="project-grid reveal">
               {projects.map((project) => {
@@ -255,7 +255,7 @@ function HomePage() {
                           <div className="project-proof-row">
                             <span>
                               <ProofIcon size={16} />
-                              Capstone evidence
+                              Case study evidence
                             </span>
                             <span>
                               <MediaIcon size={16} />
@@ -264,7 +264,7 @@ function HomePage() {
                           </div>
                           <TagRow items={project.tags} />
                           <Link className="btn btn-primary" to={`/projects/${project.slug}`}>
-                            VSTEPGO case study
+                            Xem case study
                             <ArrowRight size={18} />
                           </Link>
                         </div>
@@ -281,13 +281,13 @@ function HomePage() {
           <div className="page-container contact-grid">
             <div className="reveal">
               <span className="section-kicker">Contact</span>
-              <h2>Thông tin liên hệ.</h2>
-              <p>Email, GitHub, LinkedIn và CV sẽ được cập nhật trong phiên bản công khai.</p>
+              <h2>Liên hệ.</h2>
+              <p>Thông tin liên hệ và hồ sơ trực tuyến được trình bày gọn, ưu tiên kênh GitHub và CV trong bản công khai.</p>
             </div>
             <div className="contact-card reveal">
               <Mail size={26} />
               <h3>Profile channels</h3>
-              <p>Email / GitHub / LinkedIn / CV</p>
+              <p>GitHub / LinkedIn / CV / Email</p>
               <ScrollButton targetId="home" variant="secondary">
                 <ArrowLeft size={18} />
                 Back to top
@@ -310,7 +310,7 @@ function HomeNav({
   return (
     <header className="site-nav">
       <Link className="brand-mark" to="/">
-        <span>KMK</span>
+        <span>NMK</span>
         <strong>Nguyễn Minh Khôi</strong>
       </Link>
       <nav aria-label="Main sections">
@@ -491,7 +491,7 @@ function VstepgoPage() {
       <section className="project-section page-container">
         <SectionIntro
           kicker="Screenshots"
-          title="Interface gallery."
+          title="Screenshots."
           text="Gallery giao diện thể hiện các màn learner, exam, feedback, booking và admin dashboard."
         />
         <div className="screenshot-layout reveal">
@@ -515,7 +515,7 @@ function VstepgoPage() {
       <section className="project-section page-container">
         <SectionIntro
           kicker="Honest boundaries"
-          title="Capstone scope."
+          title="Scope."
           text="VSTEPGO được trình bày đúng phạm vi đồ án tốt nghiệp, tập trung vào năng lực triển khai frontend/mobile và product UI."
         />
         <div className="boundary-list reveal">

@@ -44,9 +44,9 @@ export const vstepgoProject: ProjectDetail = {
   type: "Capstone Project",
   period: "Final university project",
   summary:
-    "Capstone project luyện thi VSTEP đa nền tảng, thể hiện phạm vi triển khai frontend/mobile với nhiều luồng sản phẩm thực tế.",
+    "Case study capstone về nền tảng luyện thi VSTEP, dùng làm evidence cho năng lực frontend/mobile, UI state và product flow.",
   role:
-    "Responsibility: Mobile application implementation; frontend/admin flow understanding across UI, API state, dashboard and media workflows.",
+    "Responsibility: triển khai mobile application; nắm luồng frontend/admin qua UI, API state, dashboard và media workflow.",
   stack: [
     "React Native",
     "Expo Router",
@@ -62,10 +62,10 @@ export const vstepgoProject: ProjectDetail = {
     "SecureStore",
   ],
   highlights: [
-    "Mobile app với auth, tab navigation, practice, exam, profile, wallet và course booking.",
+    "Mobile app có auth, tab navigation, practice, exam, profile, wallet và course booking.",
     "Exam room cho 4 kỹ năng với timer, progress, autosave/resume và result states.",
-    "Speaking/audio flow: permission, recording, playback, upload và feedback.",
-    "Admin dashboard/content tooling dùng bảng, chart, form và role-based screens.",
+    "Speaking/audio flow gồm permission, recording, playback, upload và feedback.",
+    "Admin dashboard/content tooling với table, chart, form và role-based screens.",
   ],
   features: [
     {
@@ -75,7 +75,7 @@ export const vstepgoProject: ProjectDetail = {
     },
     {
       title: "Exam UX",
-      text: "Phòng thi 4 kỹ năng với timer, navigation, warning states, autosave và kết quả.",
+      text: "Phòng thi 4 kỹ năng với timer, navigation, warning states, autosave và result view.",
       icon: FileText,
     },
     {

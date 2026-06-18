@@ -96,13 +96,13 @@ export interface InterestItem {
 export const profileInfo: ProfileInfo = {
   name: "Nguyễn Minh Khôi",
   role: "Fresher Frontend Developer",
-  headline: "Frontend-focused developer with mobile product experience.",
-  education: "Công nghệ thông tin - Đại Học FPT HCM",
+  headline: "Frontend developer focused on React, TypeScript and mobile UI.",
+  education: "Công nghệ thông tin - Đại học FPT HCM",
   birthYear: "2003",
   location: "Ho Chi Minh City, Vietnam",
   avatar: "/assets/avatar.jpg",
   intro:
-    "Fresher Frontend Developer tốt nghiệp ngành Công nghệ thông tin, Đại học FPT HCM. Trọng tâm chuyên môn gồm React, TypeScript, responsive UI, client state và trải nghiệm mobile với React Native/Expo.",
+    "Tốt nghiệp ngành Công nghệ thông tin tại Đại học FPT HCM. Định hướng chuyên môn gồm React, TypeScript, responsive UI, client state và trải nghiệm mobile với React Native/Expo.",
 };
 
 export const quickFacts = [
@@ -119,7 +119,7 @@ export const skillAreas: SkillArea[] = [
     title: "Web UI Engineering",
     icon: MonitorSmartphone,
     summary:
-      "Xây dựng UI React theo hướng rõ luồng, component hóa tốt, có trạng thái loading/error/empty và responsive ổn định.",
+      "Xây dựng UI React có cấu trúc rõ, component hóa hợp lý, đầy đủ trạng thái loading/error/empty và responsive ổn định.",
     strengths: ["React component architecture", "Responsive layouts", "Form and route UX", "Reusable UI patterns"],
     tools: ["React", "TypeScript", "Vite", "TanStack Router", "Tailwind CSS"],
   },
@@ -139,7 +139,7 @@ export const skillAreas: SkillArea[] = [
     title: "Interactive Interface Design",
     icon: Palette,
     summary:
-      "Thiết kế giao diện có hierarchy rõ, hover/press state, reveal motion, active state và pattern mở rộng thông tin theo panel.",
+      "Thiết kế giao diện có hierarchy rõ, hover/press state, active state, motion vừa đủ và pattern mở rộng thông tin theo panel.",
     strengths: ["Design tokens", "Motion and press states", "Clear information hierarchy", "Accessible controls"],
     tools: ["CSS", "Tailwind", "Lucide", "SVG", "React Icons"],
   },
@@ -159,7 +159,7 @@ export const skillAreas: SkillArea[] = [
     title: "Modern Frontend Tooling",
     icon: Wrench,
     summary:
-      "Sử dụng toolchain phục vụ build nhanh, cấu trúc code rõ, dễ verify và dễ mở rộng khi quy mô dự án tăng.",
+      "Sử dụng toolchain phục vụ build nhanh, cấu trúc code rõ, dễ kiểm tra và dễ mở rộng khi quy mô dự án tăng.",
     strengths: ["Vite builds", "Package scripts", "CI/CD awareness", "Deployment context"],
     tools: ["npm", "Bun", "Vite", "Docker", "GitHub Actions", "Vercel"],
   },
@@ -173,7 +173,7 @@ export const interests: InterestItem[] = [
   },
   {
     title: "AI exploration",
-    text: "Tìm hiểu AI tools trong học tập, feedback sản phẩm và tối ưu quy trình phát triển phần mềm.",
+    text: "Tìm hiểu AI tools cho học tập, phản hồi sản phẩm và tối ưu quy trình phát triển phần mềm.",
     icon: Bot,
   },
   {
@@ -187,13 +187,13 @@ export const timeline = [
   {
     title: "FPT University HCM",
     meta: "Information Technology",
-    text: "Nền tảng ngành CNTT, tập trung nhiều vào frontend và sản phẩm web/mobile trong giai đoạn cuối.",
+    text: "Nền tảng ngành CNTT, tập trung vào frontend và sản phẩm web/mobile trong giai đoạn cuối.",
     icon: GraduationCap,
   },
   {
     title: "Frontend focus",
     meta: "React / TypeScript",
-    text: "Ưu tiên xây giao diện rõ, có cấu trúc component và xử lý tốt trạng thái thực tế.",
+    text: "Ưu tiên giao diện rõ, có cấu trúc component và xử lý tốt các trạng thái thực tế.",
     icon: Code2,
   },
   {
@@ -205,7 +205,7 @@ export const timeline = [
   {
     title: "AI curiosity",
     meta: "Learning by building",
-    text: "Quan tâm cách AI kết hợp vào feedback, học tập, workflow và công cụ hỗ trợ developer.",
+    text: "Quan tâm cách AI hỗ trợ feedback, học tập, workflow và công cụ dành cho developer.",
     icon: BrainCircuit,
   },
 ];
